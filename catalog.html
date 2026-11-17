@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<title>器材總覽｜里歐 MOVE GEAR 器材型錄</title>
+</head>
+<body data-page="catalog">
+
+<section class="hero short" style="padding:0">
+  <div class="hero-bg" style="background-image:url(img/life-ins-machines.jpg)"></div>
+  <div class="hero-blur" style="background-image:url(img/life-ins-machines.jpg)"></div>
+  <div class="wrap"><div class="hero-content" style="padding-bottom:40px">
+    <div class="eyebrow" style="color:#fff">Catalog</div>
+    <h1 id="pageTitle" style="font-size:clamp(36px,6vw,64px)">全部器材</h1>
+    <p id="pageSub" style="margin:0"></p>
+  </div></div>
+</section>
+
+<div class="toolbar"><div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="filters">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/></svg>
+      <input id="kw" placeholder="搜尋：胸、跑步機、啞鈴、型號…">
+    </label>
+    <div class="seg" id="place">
+      <button class="on" data-v="all">全部場地</button><button data-v="home">家用</button><button data-v="studio">工作室</button><button data-v="gym">健身房</button>
+    </div>
+    <div class="seg"><button id="easy">只看新手友善</button></div>
+    <span class="muted" id="count" style="font-size:14px"></span>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <div id="intro"></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/pilates-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

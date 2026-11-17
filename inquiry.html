@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<title>詢價清單｜里歐 MOVE GEAR 器材型錄</title>
+</head>
+<body data-page="inquiry">
+
+<main class="wrap" style="padding-top:110px">
+  <div class="sec-head">
+    <div><div class="eyebrow">Inquiry</div><h2>我的詢價清單</h2>
+      <p>每台器材的價格會依顏色、數量、運送樓層與安裝條件不同，所以都採私訊報價。整理好清單後，複製訊息貼給我們就可以了。</p></div>
+    <button class="pill pill-dark" id="clear">清空清單</button>
+  </div>
+
+  <div class="inq">
+    <div class="inq-list" id="list"></div>
+
+    <aside class="form-card">
+      <h3>補充場地資訊</h3>
+      <p class="muted" style="margin:0;font-size:14px">都是選填，填越多報價越準確。</p>
+      <div class="field"><label>使用場地</label>
+        <div class="opt-row" id="placeOpt"><button>家用</button><button>私人工作室</button><button>健身房</button><button>社區／飯店／公司</button><button>皮拉提斯教室</button></div></div>
+      <div class="field"><label>空間大小</label><input id="f-size" placeholder="例如：約 8 坪、天花板 2.6 米"></div>
+      <div class="field"><label>所在地區</label><input id="f-area" placeholder="例如：台北市大安區、3 樓有電梯"></div>
+      <div class="field"><label>其他需求</label><textarea id="f-note" rows="2" placeholder="例如：預算範圍、想練的部位、希望到貨時間"></textarea></div>
+      <div class="field"><label>怎麼稱呼你</label><input id="f-name" placeholder="例如：王小姐"></div>
+      <div class="msg-preview" id="msg"></div>
+      <div class="send-row">
+        <button class="pill pill-orange full" id="copy">複製詢價訊息</button>
+        <a class="pill pill-white full" data-go="line" target="_blank" rel="noopener">複製並開啟 LINE</a>
+        <a class="pill pill-dark" data-go="instagram" target="_blank" rel="noopener">開啟 IG</a>
+        <a class="pill pill-dark" data-go="facebook" target="_blank" rel="noopener">開啟 FB</a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="assets/data.js"></script>
+<script src="assets/pilates-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
