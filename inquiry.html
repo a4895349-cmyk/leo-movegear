@@ -12,7 +12,7 @@
 <main class="wrap" style="padding-top:110px">
   <div class="sec-head">
     <div><div class="eyebrow">Inquiry</div><h2>我的詢價清單</h2>
-      <p>每台器材的價格會依顏色、數量、運送樓層與安裝條件不同，所以都採私訊報價。整理好清單後，複製訊息貼給我們就可以了。</p></div>
+      <p>每台器材的價格會依顏色、數量、運送樓層與安裝條件不同，所以都採私訊報價。整理好清單、留下聯絡方式後按「送出詢價」，我們就會收到並主動聯絡你；也可以複製訊息自己傳給我們。</p></div>
     <button class="pill pill-dark" id="clear">清空清單</button>
   </div>
 
@@ -28,9 +28,16 @@
       <div class="field"><label>所在地區</label><input id="f-area" placeholder="例如：台北市大安區、3 樓有電梯"></div>
       <div class="field"><label>其他需求</label><textarea id="f-note" rows="2" placeholder="例如：預算範圍、想練的部位、希望到貨時間"></textarea></div>
       <div class="field"><label>怎麼稱呼你</label><input id="f-name" placeholder="例如：王小姐"></div>
+      <div class="field"><label>聯絡方式 <span class="muted">（必填，至少填一項）</span></label>
+        <input id="f-phone" type="tel" placeholder="手機，例如：0912-345-678" style="margin-bottom:8px">
+        <input id="f-line" placeholder="LINE ID" style="margin-bottom:8px">
+        <input id="f-email" type="email" placeholder="Email"></div>
+      <input id="f-honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
       <div class="msg-preview" id="msg"></div>
       <div class="send-row">
-        <button class="pill pill-orange full" id="copy">複製詢價訊息</button>
+        <button class="pill pill-orange full" id="send">送出詢價（直接寄給我們）</button>
+        <p class="muted full" style="margin:6px 0 0;font-size:13px;text-align:center">或是複製訊息，自己傳給我們：</p>
+        <button class="pill pill-dark full" id="copy">複製詢價訊息</button>
         <a class="pill pill-white full" data-go="line" target="_blank" rel="noopener">複製並開啟 LINE</a>
         <a class="pill pill-dark" data-go="instagram" target="_blank" rel="noopener">開啟 IG</a>
         <a class="pill pill-dark" data-go="facebook" target="_blank" rel="noopener">開啟 FB</a>

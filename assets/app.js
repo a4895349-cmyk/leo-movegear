@@ -258,7 +258,7 @@ const Pages = {
   },
 
   inquiry() {
-    const st = { place: "", size: "", area: "", note: "", name: "" };
+    const st = { place: "", size: "", area: "", note: "", name: "", phone: "", line: "", email: "" };
     const draw = () => {
       const l = Inq.get().filter((x) => byId(x.id));
       $("#list").innerHTML = l.length ? l.map((x) => { const p = byId(x.id); return `
@@ -268,7 +268,8 @@ const Pages = {
         : `<div class="empty" style="background:var(--card);border-radius:20px;border:1px solid var(--line)">清單還是空的<br><br><a class="pill pill-orange" href="catalog.html">去逛器材</a></div>`;
       const lines = l.map((x, i) => { const p = byId(x.id); return `${i + 1}. ${p.name}（${p.brand} ${p.model}）× ${x.q}`; });
       const msg = `您好，我想詢問以下器材的價格：\n${lines.length ? lines.join("\n") : "（尚未選擇器材，想請你們推薦）"}\n\n` +
-        `・使用場地：${st.place || "未填"}\n・空間大小：${st.size || "未填"}\n・所在地區：${st.area || "未填"}\n` + (st.note ? `・其他需求：${st.note}\n` : "") + (st.name ? `\n稱呼：${st.name}` : "");
+        `・使用場地：${st.place || "未填"}\n・空間大小：${st.size || "未填"}\n・所在地區：${st.area || "未填"}\n` + (st.note ? `・其他需求：${st.note}\n` : "") + (st.name ? `\n稱呼：${st.name}` : "") +
+        (st.phone ? `\n電話：${st.phone}` : "") + (st.line ? `\nLINE：${st.line}` : "") + (st.email ? `\nEmail：${st.email}` : "");
       $("#msg").textContent = msg;
       return msg;
     };
@@ -279,7 +280,34 @@ const Pages = {
       draw();
     };
     $("#placeOpt").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; st.place = b.textContent; document.querySelectorAll("#placeOpt button").forEach((x) => x.classList.toggle("on", x === b)); draw(); };
-    ["size", "area", "note", "name"].forEach((k) => ($("#f-" + k).oninput = (e) => { st[k] = e.target.value; draw(); }));
+    ["size", "area", "note", "name", "phone", "line", "email"].forEach((k) => ($("#f-" + k).oninput = (e) => { st[k] = e.target.value.trim(); draw(); }));
+    const send = $("#send");
+    send.onclick = async () => {
+      if (!st.phone && !st.line && !st.email) { toast("請至少留一個聯絡方式（電話、LINE 或 Email）"); $("#f-phone").focus(); return; }
+      if (st.email && !/^\S+@\S+\.\S+$/.test(st.email)) { toast("Email 格式好像不對，再檢查一下"); $("#f-email").focus(); return; }
+      if ($("#f-honey").value) return;
+      const l = Inq.get().filter((x) => byId(x.id));
+      const body = {
+        _subject: `【官網詢價】${st.name || "新客戶"}・${l.length} 項器材`,
+        _template: "table", _captcha: "false",
+        稱呼: st.name || "未填", 電話: st.phone || "未填", LINE: st.line || "未填", Email: st.email || "未填",
+        使用場地: st.place || "未填", 空間大小: st.size || "未填", 所在地區: st.area || "未填", 其他需求: st.note || "未填",
+        詢價器材: l.length ? l.map((x, i) => { const p = byId(x.id); return `${i + 1}. ${p.name}（${p.brand} ${p.model}）× ${x.q}`; }).join("\n") : "未選擇，請推薦",
+      };
+      if (st.email) body._replyto = st.email;
+      send.disabled = true; const label = send.textContent; send.textContent = "送出中…";
+      try {
+        const r = await fetch("https://formsubmit.co/ajax/" + CONFIG.email, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(body) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || String(j.success) === "false") throw new Error(j.message || r.status);
+        send.textContent = "已送出 ✓";
+        toast("詢價已送出！我們會盡快用你留的方式聯絡你");
+      } catch (err) {
+        send.disabled = false; send.textContent = label;
+        toast("送出失敗，請改用下方「複製詢價訊息」傳 LINE 給我們");
+      }
+    };
     const copy = async () => {
       const m = draw();
       try { await navigator.clipboard.writeText(m); toast("訊息已複製，貼到聊天視窗即可"); }

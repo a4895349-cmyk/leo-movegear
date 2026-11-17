@@ -426,3 +426,4 @@ details.faq p{margin:10px 0 0;color:var(--gray);font-size:15px}
 }
 
 .table-scroll .compare{min-width:560px}
+.pill:disabled{opacity:.6;cursor:default}

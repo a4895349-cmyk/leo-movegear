@@ -8,6 +8,7 @@ const CONFIG = {
   instagram: "https://www.instagram.com/leo_yu881110/", // IG 連結
   facebook: "https://www.facebook.com/profile.php?id=61572152243811", // FB 連結
   phone: "0903-680-572",                           // 電話，留空就不顯示
+  email: "a4895349@gmail.com",                     // 官網詢價表單寄到這個信箱（透過 FormSubmit）
 };
 
 /* =========================================================
